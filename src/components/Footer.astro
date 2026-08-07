@@ -1,0 +1,75 @@
+---
+import { copy, pathFor, type Lang } from "../i18n/copy";
+import Mark from "./Mark.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = copy[lang];
+const year = new Date().getFullYear();
+
+const links = [
+  { href: "#features", label: t.nav.features },
+  { href: "#how", label: t.nav.how },
+  { href: "#pricing", label: t.nav.pricing },
+];
+---
+
+<footer class="border-t border-white/[0.05] py-14">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-16">
+      <div>
+        <a
+          href={pathFor(lang)}
+          class="pressable inline-flex items-center gap-2.5 text-slate-100 hover:text-white"
+        >
+          <Mark class="h-5 w-5 text-violet-400" />
+          <span class="text-[0.95rem] font-semibold tracking-tight">ThreadVault</span>
+        </a>
+        <p class="lede mt-3 max-w-sm text-sm leading-relaxed text-slate-500">{t.footer.tagline}</p>
+
+        <div class="mt-8 max-w-md rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
+          <p class="text-sm font-medium text-slate-200">{t.footer.privacyTitle}</p>
+          <p class="lede mt-1.5 text-sm leading-relaxed text-slate-500">{t.footer.privacyBody}</p>
+        </div>
+      </div>
+
+      <nav class="text-sm" aria-label={lang === "es" ? "Pie de página" : "Footer"}>
+        <ul class="space-y-2.5">
+          {
+            links.map((link) => (
+              <li>
+                <a class="pressable text-slate-400 hover:text-white" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              class="pressable text-slate-400 hover:text-white"
+              href="mailto:torreseduardo804@gmail.com?subject=ThreadVault"
+            >
+              {t.footer.contact}
+            </a>
+          </li>
+          <li>
+            <a
+              class="pressable text-slate-400 hover:text-white"
+              href={pathFor(lang === "es" ? "en" : "es")}
+              hreflang={lang === "es" ? "en" : "es"}
+            >
+              {lang === "es" ? "English" : "Español"}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="mt-12 border-t border-white/[0.05] pt-6 text-xs text-slate-600">
+      © {year} Eduardo Torres · {t.footer.rights}
+    </p>
+  </div>
+</footer>

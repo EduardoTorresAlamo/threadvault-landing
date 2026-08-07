@@ -1,0 +1,90 @@
+---
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+import { copy, pathFor, type Lang } from "../i18n/copy";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = copy[lang];
+const canonical = new URL(pathFor(lang), Astro.site ?? "https://vault.eduardo-torres.com");
+---
+
+<!doctype html>
+<html lang={t.htmlLang} class="antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#020617" />
+
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="es" href={new URL("/", canonical).href} />
+    <link rel="alternate" hreflang="en" href={new URL("/en/", canonical).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", canonical).href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={lang === "es" ? "es_PR" : "en_US"} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      // Hide reveal targets only once the observer is guaranteed to run, so the
+      // page stays readable if this script never executes.
+      (() => {
+        const root = document.documentElement;
+        if (!("IntersectionObserver" in window)) return;
+        root.dataset.revealReady = "";
+
+        const start = () => {
+          const targets = document.querySelectorAll("[data-reveal]");
+          const observer = new IntersectionObserver(
+            (entries) => {
+              for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                entry.target.setAttribute("data-revealed", "");
+                observer.unobserve(entry.target);
+              }
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+          );
+          for (const target of targets) observer.observe(target);
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", start, { once: true });
+        } else {
+          start();
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="font-sans">
+    <a
+      href="#main"
+      class="pressable sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-violet-500 focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium focus-visible:text-white"
+    >
+      {t.nav.skip}
+    </a>
+
+    <Nav lang={lang} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+  </body>
+</html>
