@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const lang = "es" as const;
+---
+
+<Layout lang={lang}>
+  <article class="mx-auto max-w-2xl px-5 py-32 sm:px-8 sm:py-40">
+    <h1 class="display text-4xl font-semibold text-white">Privacidad</h1>
+
+    <p class="lede mt-6 leading-relaxed text-slate-400">
+      ThreadVault no tiene servidor, ni cuentas, ni analítica, ni publicidad. Esto es exactamente
+      lo que la app puede enviar por la red.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Clasificación con IA</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Corre en tu iPhone con Apple Intelligence. Lo que guardas nunca se envía a un modelo por
+      internet, bajo ninguna configuración. Si tu dispositivo no es compatible, ThreadVault sigue
+      guardando y buscando, solo sin resumen ni categoría.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">La página que compartiste</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Para mostrar el título y la vista previa, ThreadVault descarga la página que guardaste,
+      igual que hace tu navegador. Solo HTTPS, sin cookies, sin sesión que persista.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Búsqueda semántica</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Si la activas, Apple descarga una vez su modelo de embeddings. Después, todo el cálculo
+      ocurre en tu teléfono.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Lo que nunca sale</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Tus resúmenes, categorías, etiquetas, texto de artículos e imágenes guardadas viven solo en
+      tu iPhone.
+    </p>
+
+    <p class="lede mt-10 text-sm text-slate-500">
+      ¿Preguntas? Escríbeme a <a
+        class="pressable text-gold-300 hover:text-gold-200"
+        href="mailto:torreseduardo804@gmail.com?subject=ThreadVault">torreseduardo804@gmail.com</a
+      >.
+    </p>
+  </article>
+</Layout>
