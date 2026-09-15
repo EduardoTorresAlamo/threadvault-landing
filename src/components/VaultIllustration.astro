@@ -1,0 +1,177 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+// Astro's i18n routing (astro.config.mjs: defaultLocale "es", locales
+// ["es", "en"]) resolves this per page even though the component itself
+// takes no lang prop, so the accessible name still matches each page's
+// language without widening this component's contract beyond `class`.
+const locale = Astro.currentLocale ?? "es";
+
+const ariaLabel =
+  locale === "en"
+    ? "Illustration of a stack of vault cards with a category tag, summary lines, and tag chips"
+    : "Ilustración de una pila de tarjetas del vault con una etiqueta de categoría, líneas de resumen y chips de etiqueta";
+---
+
+<!--
+  Original illustration: a fanned stack of vault cards with a category chip,
+  title/summary bars and tag chips (drawn as solid shapes, never <text>, so
+  this needs no per-language variant), a gold "on-device spark" badge, and an
+  emerald search glyph. Two soft organic blob shapes sit behind the stack as
+  the only echo of the reference layout's illustration language, abstracted
+  into ThreadVault's own gold/emerald palette. No people, no rockets.
+-->
+<div class={className}>
+  <svg viewBox="0 0 600 600" role="img" aria-label={ariaLabel} class="h-auto w-full">
+    <!-- soft organic shapes, behind the stack -->
+    <path
+      d="M60,420 C40,320 120,240 220,250 C230,350 160,430 60,420 Z"
+      fill="var(--color-gold-300)"
+      opacity="0.16"
+    ></path>
+    <path
+      d="M520,140 C560,220 520,310 430,320 C410,240 440,150 520,140 Z"
+      fill="var(--color-emerald-400)"
+      opacity="0.14"
+    ></path>
+
+    <!-- back card -->
+    <g transform="rotate(-7 300 300)">
+      <rect
+        x="150"
+        y="150"
+        width="300"
+        height="220"
+        rx="26"
+        fill="var(--color-ink-950)"
+        stroke="color-mix(in oklab, var(--color-white) 6%, transparent)"
+      ></rect>
+    </g>
+
+    <!-- mid card -->
+    <g transform="rotate(-2.5 300 300)">
+      <rect
+        x="150"
+        y="150"
+        width="300"
+        height="220"
+        rx="26"
+        fill="var(--color-ink-900)"
+        stroke="color-mix(in oklab, var(--color-white) 8%, transparent)"
+      ></rect>
+    </g>
+
+    <!-- front card, with the fake title/summary/tag content -->
+    <g>
+      <rect
+        x="150"
+        y="160"
+        width="300"
+        height="230"
+        rx="26"
+        fill="var(--color-ink-900)"
+        stroke="color-mix(in oklab, var(--color-gold-300) 25%, transparent)"
+        stroke-width="1.5"
+      ></rect>
+
+      <!-- category chip -->
+      <rect
+        x="176"
+        y="188"
+        width="86"
+        height="22"
+        rx="11"
+        fill="color-mix(in oklab, var(--color-gold-300) 16%, transparent)"
+      ></rect>
+      <rect x="188" y="196" width="62" height="6" rx="3" fill="var(--color-gold-300)" opacity="0.7"
+      ></rect>
+
+      <!-- title bar -->
+      <rect
+        x="176"
+        y="228"
+        width="220"
+        height="12"
+        rx="6"
+        fill="color-mix(in oklab, var(--color-white) 85%, transparent)"
+      ></rect>
+      <!-- summary bars -->
+      <rect
+        x="176"
+        y="252"
+        width="248"
+        height="8"
+        rx="4"
+        fill="color-mix(in oklab, var(--color-white) 35%, transparent)"
+      ></rect>
+      <rect
+        x="176"
+        y="268"
+        width="200"
+        height="8"
+        rx="4"
+        fill="color-mix(in oklab, var(--color-white) 35%, transparent)"
+      ></rect>
+
+      <!-- tag chips -->
+      <rect
+        x="176"
+        y="340"
+        width="64"
+        height="20"
+        rx="10"
+        fill="color-mix(in oklab, var(--color-white) 6%, transparent)"
+      ></rect>
+      <rect
+        x="188"
+        y="347"
+        width="40"
+        height="6"
+        rx="3"
+        fill="color-mix(in oklab, var(--color-white) 40%, transparent)"
+      ></rect>
+      <rect
+        x="248"
+        y="340"
+        width="80"
+        height="20"
+        rx="10"
+        fill="color-mix(in oklab, var(--color-white) 6%, transparent)"
+      ></rect>
+      <rect
+        x="260"
+        y="347"
+        width="56"
+        height="6"
+        rx="3"
+        fill="color-mix(in oklab, var(--color-white) 40%, transparent)"
+      ></rect>
+    </g>
+
+    <!-- on-device spark badge -->
+    <g transform="translate(462 128)">
+      <circle
+        r="30"
+        fill="var(--color-ink-950)"
+        stroke="color-mix(in oklab, var(--color-gold-300) 35%, transparent)"
+      ></circle>
+      <path d="M0,-14 L4,-4 14,0 4,4 0,14 -4,4 -14,0 -4,-4 Z" fill="var(--color-gold-300)"></path>
+    </g>
+
+    <!-- search glyph, floating -->
+    <g
+      transform="translate(120 470)"
+      stroke="var(--color-emerald-400)"
+      stroke-width="3"
+      fill="none"
+      stroke-linecap="round"
+    >
+      <circle cx="0" cy="0" r="16"></circle>
+      <line x1="12" y1="12" x2="26" y2="26"></line>
+    </g>
+  </svg>
+</div>
