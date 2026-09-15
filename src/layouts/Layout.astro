@@ -7,11 +7,32 @@ import Footer from "../components/Footer.astro";
 
 interface Props {
   lang: Lang;
+  title?: string;
+  description?: string;
 }
 
-const { lang } = Astro.props;
+// Known route counterparts, ES <-> EN, for hreflang alternates. A route
+// missing from this map (there shouldn't be one) falls back to the homepages.
+const routeCounterparts: Record<string, { es: string; en: string }> = {
+  "/": { es: "/", en: "/en/" },
+  "/en/": { es: "/", en: "/en/" },
+  "/privacidad/": { es: "/privacidad/", en: "/en/privacy/" },
+  "/en/privacy/": { es: "/privacidad/", en: "/en/privacy/" },
+  "/gracias/": { es: "/gracias/", en: "/en/thanks/" },
+  "/en/thanks/": { es: "/gracias/", en: "/en/thanks/" },
+};
+
+const { lang, title, description } = Astro.props;
 const t = copy[lang];
-const canonical = new URL(pathFor(lang), Astro.site ?? "https://vault.eduardo-torres.com");
+const origin = Astro.site ?? "https://vault.eduardo-torres.com";
+// Astro.url.pathname reflects the page actually being rendered; pathFor(lang)
+// (always the homepage for that language) is only a fallback for the rare
+// case it's unavailable at build time.
+const currentPath = Astro.url?.pathname ?? pathFor(lang);
+const counterpart = routeCounterparts[currentPath] ?? { es: "/", en: "/en/" };
+const canonical = new URL(currentPath, origin);
+const resolvedTitle = title ?? t.meta.title;
+const resolvedDescription = description ?? t.meta.description;
 ---
 
 <!doctype html>
@@ -19,22 +40,22 @@ const canonical = new URL(pathFor(lang), Astro.site ?? "https://vault.eduardo-to
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t.meta.title}</title>
-    <meta name="description" content={t.meta.description} />
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#020617" />
 
     <link rel="canonical" href={canonical.href} />
-    <link rel="alternate" hreflang="es" href={new URL("/", canonical).href} />
-    <link rel="alternate" hreflang="en" href={new URL("/en/", canonical).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL("/", canonical).href} />
+    <link rel="alternate" hreflang="es" href={new URL(counterpart.es, origin).href} />
+    <link rel="alternate" hreflang="en" href={new URL(counterpart.en, origin).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(counterpart.es, origin).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={t.meta.title} />
-    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:locale" content={lang === "es" ? "es_PR" : "en_US"} />
     <meta name="twitter:card" content="summary_large_image" />

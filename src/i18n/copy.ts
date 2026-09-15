@@ -14,6 +14,11 @@ export const copy = {
       title: "ThreadVault: Tu memoria digital",
       description:
         "Guarda enlaces, textos e imágenes desde cualquier app. ThreadVault los resume, los clasifica y los etiqueta en tu iPhone. Sin cuentas, sin servidores.",
+      privacyPage: {
+        title: "Privacidad: ThreadVault",
+        description:
+          "Lo que sale del teléfono, y lo que nunca sale. ThreadVault no tiene servidor, ni cuentas, ni analítica, ni publicidad.",
+      },
     },
     nav: {
       features: "Funciones",
@@ -208,6 +213,11 @@ export const copy = {
       title: "ThreadVault: Your digital memory",
       description:
         "Save links, text and images from any app. ThreadVault summarises, files and tags them on your iPhone. No account, no server.",
+      privacyPage: {
+        title: "Privacy: ThreadVault",
+        description:
+          "What leaves your phone, and what never does. ThreadVault has no server, no accounts, no analytics and no advertising.",
+      },
     },
     nav: {
       features: "Features",

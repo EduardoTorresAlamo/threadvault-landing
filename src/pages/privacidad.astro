@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { copy } from "../i18n/copy";
 
 const lang = "es" as const;
+const t = copy[lang].meta.privacyPage;
 ---
 
-<Layout lang={lang}>
+<Layout lang={lang} title={t.title} description={t.description}>
   <article class="mx-auto max-w-2xl px-5 py-32 sm:px-8 sm:py-40">
     <h1 class="display text-4xl font-semibold text-white">Privacidad</h1>
 
