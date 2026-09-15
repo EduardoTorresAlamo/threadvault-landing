@@ -24,9 +24,6 @@ interface KVNamespace {
 
 interface Env {
   NOTIFY: KVNamespace;
-  // Debug-only, gated: unset in production. Enables GET /api/notify for local
-  // testing only, never logs or returns email addresses.
-  DEBUG?: string;
 }
 
 interface PagesFunctionContext<E> {
@@ -181,20 +178,4 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         new URL(notifyLang === "en" ? "/en/thanks/" : "/gracias/", request.url),
         303,
       );
-};
-
-/**
- * Debug-only inspection endpoint for local `wrangler pages dev` testing, so a
- * curl test can prove the honeypot path wrote nothing without exposing any
- * email address. Returns key names only, never values, and only responds at
- * all when `DEBUG=1` is set in the environment (unset in production, so this
- * 404s in prod exactly like an undefined route would).
- */
-export const onRequestGet: PagesFunction<Env> = async (context) => {
-  if (context.env.DEBUG !== "1") {
-    return new Response("Not found", { status: 404 });
-  }
-  const prefix = new URL(context.request.url).searchParams.get("prefix") ?? "notify:";
-  const list = await context.env.NOTIFY.list({ prefix });
-  return Response.json({ count: list.keys.length, keys: list.keys.map((k) => k.name) });
 };
