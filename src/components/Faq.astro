@@ -23,7 +23,10 @@ const headingId = "faq-heading";
       {
         t.items.map((item, index) => (
           <details class="group p-5 sm:p-6" data-reveal style={`--reveal-delay: ${index * 40}ms`}>
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 marker:content-none">
+            {/* Negative margin + matching padding expands the tap target to the
+                full padded row (the <details> padding sits outside <summary> by
+                default, leaving only ~20px of text as the actual hit area). */}
+            <summary class="-m-5 flex cursor-pointer list-none items-center justify-between gap-4 p-5 marker:content-none sm:-m-6 sm:p-6">
               <h3 class="text-sm font-medium text-slate-100">{item.q}</h3>
               <svg
                 class="h-4 w-4 shrink-0 text-slate-500 transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
