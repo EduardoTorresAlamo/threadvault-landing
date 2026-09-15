@@ -1,0 +1,76 @@
+---
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
+interface Props {
+  /** File stem under public/screens/, without extension, e.g. "classify". */
+  name: string;
+  alt: string;
+}
+
+const { name, alt } = Astro.props;
+
+// Astro component frontmatter runs in Node at build time, so this check
+// happens once per `astro build` (and once per request in `astro dev`, which
+// also runs on Node), never in the browser. It means the page always builds
+// even before the owner supplies real captures.
+//
+// Resolved from import.meta.url rather than process.cwd() so the check is
+// correct regardless of which directory Astro was invoked from: this file
+// lives at src/components/ScreenshotFrame.astro, so `../../public/screens/`
+// from it is the project's public/screens/ in both `astro dev` and
+// `astro build`.
+const screenshotPath = fileURLToPath(
+  new URL(`../../public/screens/${name}.webp`, import.meta.url),
+);
+const hasScreenshot = existsSync(screenshotPath);
+
+// Native capture is 1320x2868 (iPhone 17 Pro Max); delivered files are
+// pre-scaled to 640x1392 (see docs/superpowers/specs/2026-09-15-landing-redesign-design.md §6).
+const WIDTH = 640;
+const HEIGHT = 1392;
+---
+
+<div
+  class="mx-auto w-[9rem] overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-ink-950 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] sm:w-[10rem]"
+>
+  <div class="aspect-[640/1392] w-full">
+    {
+      hasScreenshot ? (
+        <img
+          src={`/screens/${name}.webp`}
+          alt={alt}
+          width={WIDTH}
+          height={HEIGHT}
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover"
+        />
+      ) : (
+        <div
+          class="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-ink-900 to-ink-950 text-center"
+          role="img"
+          aria-label={alt}
+          data-alt={alt}
+          data-width={WIDTH}
+          data-height={HEIGHT}
+          data-loading="lazy"
+          data-decoding="async"
+        >
+          <svg
+            class="h-6 w-6 text-gold-300/50"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <rect x="5" y="3" width="14" height="18" rx="2" />
+            <path d="M9 18h6" />
+          </svg>
+          <p class="px-3 text-[0.6rem] leading-tight text-slate-600">Screenshot: {name}</p>
+        </div>
+      )
+    }
+  </div>
+</div>
