@@ -1,0 +1,47 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const lang = "en" as const;
+---
+
+<Layout lang={lang}>
+  <article class="mx-auto max-w-2xl px-5 py-32 sm:px-8 sm:py-40">
+    <h1 class="display text-4xl font-semibold text-white">Privacy</h1>
+
+    <p class="lede mt-6 leading-relaxed text-slate-400">
+      ThreadVault has no server, no accounts, no analytics and no advertising. This is exactly
+      what the app can send over the network.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">AI classification</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Runs on your iPhone with Apple Intelligence. What you save is never sent to a model over the
+      internet, under any configuration. If your device is not eligible, ThreadVault still saves
+      and searches, just without a summary or category.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">The page you shared</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      To show the title and preview, ThreadVault downloads the page you saved, the same thing your
+      browser does. HTTPS only, no cookies, no session that persists.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Semantic search</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      If you turn it on, Apple downloads its embedding model once. After that, every calculation
+      happens on your phone.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">What never leaves</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Your summaries, categories, tags, article text and saved images live only on your iPhone.
+    </p>
+
+    <p class="lede mt-10 text-sm text-slate-500">
+      Questions? Write to <a
+        class="pressable text-gold-300 hover:text-gold-200"
+        href="mailto:torreseduardo804@gmail.com?subject=ThreadVault">torreseduardo804@gmail.com</a
+      >.
+    </p>
+  </article>
+</Layout>
