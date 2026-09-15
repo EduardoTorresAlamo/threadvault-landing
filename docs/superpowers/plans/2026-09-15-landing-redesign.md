@@ -496,7 +496,7 @@ export const copy = {
       eyebrow: "Pricing",
       title: "Free to save. Pro to go deeper.",
       note: "Prices in USD. Download ThreadVault for free on the App Store.",
-      soon: "Available now",
+      soon: "Coming soon",
       perMonth: "/month",
       plans: [
         {
@@ -519,7 +519,7 @@ export const copy = {
           tagline: "For vaults past a thousand items.",
           featured: true,
           badge: "Best value",
-          cta: "Available now",
+          cta: "Coming soon",
           features: [
             "Everything in Free",
             "Semantic search",

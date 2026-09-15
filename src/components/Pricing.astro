@@ -29,11 +29,7 @@ const t = copy[lang].pricing;
             data-reveal
             style={`--reveal-delay: ${index * 70}ms`}
           >
-            {plan.featured && (
-              <span class="absolute right-7 top-7 rounded-full bg-violet-500/15 px-2.5 py-1 text-[0.68rem] font-medium text-violet-200 sm:right-8 sm:top-8">
-                {t.soon}
-              </span>
-            )}
+
 
             <h3 class="heading text-lg font-semibold text-white">{plan.name}</h3>
             <p class="mt-1 text-sm text-slate-400">{plan.tagline}</p>

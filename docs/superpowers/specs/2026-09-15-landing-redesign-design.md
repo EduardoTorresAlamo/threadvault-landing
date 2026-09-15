@@ -225,7 +225,7 @@ Everything else in `hero.*` is unchanged; the `cards` array becomes unused
 
 **Pricing**: add `plans[1].badge`: es "Mejor valor" / en "Best value".
 **Flagging, not fixing:** today's `copy.ts` has Pro's `cta` as "Próximamente"
-(es) vs. "Available now" (en), and `pricing.soon` itself differs the same
+(es) vs. "Coming soon" (en), and `pricing.soon` itself differs the same
 way, the two languages disagree on whether Pro is live. Carried forward
 unchanged; see open question #1.
 
@@ -443,10 +443,9 @@ origin anywhere in the repo. No changes to the iOS or Android app codebases.
 
 ## 9. Open questions for the owner
 
-1. **Pricing inconsistency:** today's `copy.ts` has Pro's CTA reading
-   "coming soon" in Spanish but "available now" in English (§4). Is Pro
-   actually purchasable today? Carried forward unchanged rather than
-   guessed; fix both languages at once once known.
+1. **Pricing inconsistency:** RESOLVED 2026-09-15. Pro is not purchasable
+   yet; both languages read "Próximamente" / "Coming soon". The app itself
+   is live on the App Store, so the primary CTA stays "Download".
 2. **Privacy page depth:** the new policy pages paraphrase `PRIVACY.md`
    rather than reproduce it verbatim (§4). Acceptable, or should it be a
    closer section-by-section translation?
