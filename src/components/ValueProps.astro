@@ -1,0 +1,50 @@
+---
+import { copy, type Lang } from "../i18n/copy";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = copy[lang].values;
+
+const icons = [
+  // On-device: a phone with a core at its centre (same glyph family as Features).
+  "M8.5 3h7a1.5 1.5 0 0 1 1.5 1.5v15A1.5 1.5 0 0 1 15.5 21h-7A1.5 1.5 0 0 1 7 19.5v-15A1.5 1.5 0 0 1 8.5 3Zm1.5 7.5h4v4h-4v-4Z",
+  // No server: a crossed-out rack.
+  "M4 5.5h16M4 10.5h16M4 15.5h9M6 5.5v10M18 5.5v3m-3 6 6 6m0-6-6 6",
+  // Share: a card leaving the stack.
+  "M8 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm4 9V5m0 0-2.5 2.5M12 5l2.5 2.5",
+];
+---
+
+<section id="values" class="scroll-mt-24 py-16 sm:py-20">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <p class="text-center text-sm font-medium text-gold-300" data-reveal>{t.eyebrow}</p>
+
+    <div class="mt-8 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      {
+        t.items.map((item, index) => (
+          <div class="text-center sm:text-left" data-reveal style={`--reveal-delay: ${index * 60}ms`}>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gold-400/20 bg-gold-400/10 text-gold-300">
+              <svg
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d={icons[index]} />
+              </svg>
+            </span>
+            <h3 class="heading mt-4 text-base font-semibold text-white">{item.title}</h3>
+            <p class="lede mt-1.5 text-sm leading-relaxed text-slate-400">{item.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
