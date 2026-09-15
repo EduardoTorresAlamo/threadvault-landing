@@ -1,5 +1,6 @@
 ---
 import { copy, type Lang } from "../i18n/copy";
+import VaultIllustration from "./VaultIllustration.astro";
 
 interface Props {
   lang: Lang;
@@ -7,20 +8,14 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = copy[lang].hero;
-
-// Two columns, the right one dropped, so the grid reads as a vault rather than a table.
-const columns = [
-  [t.cards[0], t.cards[2]],
-  [t.cards[1], t.cards[3]],
-];
 ---
 
 <section class="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
-  <!-- One soft light source behind the device, low enough to read as depth. -->
+  <!-- One soft light source behind the illustration, low enough to read as depth. -->
   <div
     aria-hidden="true"
     class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[46rem] w-[70rem] -translate-x-1/2"
-    style="background: radial-gradient(50% 50% at 50% 32%, color-mix(in oklab, var(--color-violet-600) 17%, transparent), transparent 70%);"
+    style="background: radial-gradient(50% 50% at 50% 32%, color-mix(in oklab, var(--color-gold-500) 15%, transparent), transparent 70%);"
   >
   </div>
 
@@ -36,8 +31,9 @@ const columns = [
       </p>
 
       <h1 class="display mt-6 text-[2.6rem] font-semibold text-white sm:text-6xl">
-        {t.titleTop}<br />
-        <span class="text-slate-500">{t.titleBottom}</span>
+        {t.titleLine1}<br />
+        <span class="text-slate-500">{t.titleLine2}</span><br />
+        <span class="text-slate-500">{t.titleLine3}</span>
       </h1>
 
       <p class="lede mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate-400 sm:text-lg">
@@ -49,7 +45,7 @@ const columns = [
           href="https://apps.apple.com/us/app/threadvault/id6757399918"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full bg-violet-500 px-5 py-2.5 text-sm font-medium text-white shadow-[0_8px_30px_-8px] shadow-violet-500/60 hover:bg-violet-400 transition-colors"
+          class="cta-primary pressable"
         >
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
@@ -59,10 +55,7 @@ const columns = [
           {t.ctaPrimary}
         </a>
 
-        <a
-          href="#how"
-          class="pressable inline-flex items-center gap-1.5 rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-slate-200 hover:border-white/20 hover:bg-white/5 hover:text-white"
-        >
+        <a href="#how" class="cta-secondary pressable">
           {t.ctaSecondary}
           <svg
             class="h-4 w-4 text-slate-500"
@@ -82,81 +75,12 @@ const columns = [
       <p class="mt-5 text-sm text-slate-600">{t.footnote}</p>
     </div>
 
-    <!-- Device -->
-    <div class="justify-self-center lg:justify-self-end" data-reveal style="--reveal-delay: 90ms">
-      <div
-        class="w-[19.5rem] rounded-[2.75rem] border border-white/[0.09] bg-slate-900/40 p-2.5 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl sm:w-[21rem]"
-      >
-        <div
-          class="relative overflow-hidden rounded-[2.1rem] border border-white/[0.06] bg-slate-950/80 px-4 pb-4 pt-3"
-        >
-          <div class="mx-auto mb-4 h-1 w-24 rounded-full bg-white/10"></div>
-
-          <div class="flex items-baseline justify-between">
-            <h2 class="heading text-xl font-semibold text-white">{t.mockTitle}</h2>
-            <span class="text-xs text-slate-600">{t.mockSubtitle}</span>
-          </div>
-
-          <div class="mt-3 flex items-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2">
-            <svg
-              class="h-3.5 w-3.5 text-slate-600"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="7" cy="7" r="4.5"></circle>
-              <path d="m10.5 10.5 3 3"></path>
-            </svg>
-            <span class="h-1.5 w-20 rounded-full bg-white/[0.07]"></span>
-          </div>
-
-          <div class="mt-3 grid grid-cols-2 items-start gap-2.5">
-            {
-              columns.map((column, columnIndex) => (
-                <div class:list={["grid gap-2.5", columnIndex === 1 && "mt-5"]}>
-                  {column.map((card) => (
-                    <article class="surface rounded-2xl p-3">
-                      <p class="text-[0.6rem] font-medium uppercase tracking-[0.08em] text-violet-300/80">
-                        {card.category}
-                      </p>
-                      <h3 class="mt-1.5 text-[0.78rem] font-semibold leading-snug text-slate-100">
-                        {card.title}
-                      </h3>
-                      <p class="mt-1 text-[0.66rem] leading-relaxed text-slate-500">
-                        {card.summary}
-                      </p>
-                      <div class="mt-2 flex flex-wrap gap-1">
-                        {card.tags.map((tag) => (
-                          <span class="rounded-md bg-white/[0.05] px-1.5 py-0.5 text-[0.58rem] text-slate-400">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              ))
-            }
-          </div>
-
-          <!-- Content fades under the floating status chip instead of hitting a rule. -->
-          <div
-            aria-hidden="true"
-            class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"
-          >
-          </div>
-
-          <p
-            class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 rounded-full border border-white/[0.08] bg-slate-900/80 px-3 py-2 text-[0.68rem] text-slate-400 backdrop-blur-md"
-          >
-            <span class="h-1.5 w-1.5 rounded-full bg-violet-400"></span>
-            {t.mockStatus}
-          </p>
-        </div>
-      </div>
+    <div
+      class="w-[19.5rem] justify-self-center sm:w-[24rem] lg:w-[26rem] lg:justify-self-end"
+      data-reveal
+      style="--reveal-delay: 90ms"
+    >
+      <VaultIllustration />
     </div>
   </div>
 </section>
