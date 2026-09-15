@@ -1,16 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+import ValueProps from "../components/ValueProps.astro";
 import Features from "../components/Features.astro";
 import HowItWorks from "../components/HowItWorks.astro";
+import Privacy from "../components/Privacy.astro";
 import Pricing from "../components/Pricing.astro";
+import AndroidNotify from "../components/AndroidNotify.astro";
+import Faq from "../components/Faq.astro";
 
 const lang = "es" as const;
 ---
 
 <Layout lang={lang}>
   <Hero lang={lang} />
+  <ValueProps lang={lang} />
   <Features lang={lang} />
   <HowItWorks lang={lang} />
+  <Privacy lang={lang} />
   <Pricing lang={lang} />
+  <AndroidNotify lang={lang} />
+  <Faq lang={lang} />
 </Layout>
