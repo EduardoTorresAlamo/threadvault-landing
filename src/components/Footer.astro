@@ -14,7 +14,10 @@ const links = [
   { href: "#features", label: t.nav.features },
   { href: "#how", label: t.nav.how },
   { href: "#pricing", label: t.nav.pricing },
+  { href: "#faq", label: t.nav.faq },
 ];
+
+const policyHref = lang === "es" ? "/privacidad/" : "/en/privacy/";
 ---
 
 <footer class="border-t border-white/[0.05] py-14">
@@ -25,15 +28,10 @@ const links = [
           href={pathFor(lang)}
           class="pressable inline-flex items-center gap-2.5 text-slate-100 hover:text-white"
         >
-          <Mark class="h-5 w-5 text-violet-400" />
+          <Mark class="h-5 w-5 text-gold-300" />
           <span class="text-[0.95rem] font-semibold tracking-tight">ThreadVault</span>
         </a>
         <p class="lede mt-3 max-w-sm text-sm leading-relaxed text-slate-500">{t.footer.tagline}</p>
-
-        <div class="mt-8 max-w-md rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
-          <p class="text-sm font-medium text-slate-200">{t.footer.privacyTitle}</p>
-          <p class="lede mt-1.5 text-sm leading-relaxed text-slate-500">{t.footer.privacyBody}</p>
-        </div>
       </div>
 
       <nav class="text-sm" aria-label={lang === "es" ? "Pie de página" : "Footer"}>
@@ -47,6 +45,11 @@ const links = [
               </li>
             ))
           }
+          <li>
+            <a class="pressable text-slate-400 hover:text-white" href={policyHref}>
+              {t.footer.privacyLink}
+            </a>
+          </li>
           <li>
             <a
               class="pressable text-slate-400 hover:text-white"
@@ -73,12 +76,12 @@ const links = [
         href="https://apps.apple.com/us/app/threadvault/id6757399918"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 rounded-xl bg-black px-5 py-2.5 text-sm font-medium text-white hover:bg-black/80 transition-colors border border-white/10"
+        class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-black px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-black/80"
       >
         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
           <path d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.6 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.6.7 2.8.7 1.1 0 1.9-1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.2-.9-2.2-3.2zM14.2 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/>
         </svg>
-        Descargar en el App Store
+        {t.hero.ctaPrimary}
       </a>
     </div>
     <p class="mt-6 border-t border-white/[0.05] pt-6 text-xs text-slate-600">
