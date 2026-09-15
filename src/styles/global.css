@@ -6,6 +6,24 @@
   /* Stronger than the built-in curves, which are too weak to read as intentional. */
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* Gold replaces violet as the primary accent. Sampled from the app icon
+     spec: a layered card stack in #E8D5A3 on a near-black radial gradient
+     (see ThreadVault/Assets.xcassets, scripts/render-app-icon.swift). */
+  --color-gold-50: #fbf7ee;
+  --color-gold-100: #f5ebd4;
+  --color-gold-200: #f0e4c4;
+  --color-gold-300: #e8d5a3;
+  --color-gold-400: #ddc079;
+  --color-gold-500: #cba753;
+  --color-gold-600: #a98937;
+  --color-gold-950: #2a2210;
+
+  /* Near-black card-surface family, echoes the app icon's dark gradient.
+     Used where a surface should read as "the app," not generic site chrome:
+     the hero illustration and the Privacy section. */
+  --color-ink-900: #1d1a15;
+  --color-ink-950: #14120f;
 }
 
 @layer base {
@@ -25,12 +43,12 @@
   }
 
   ::selection {
-    background-color: color-mix(in oklab, var(--color-violet-500) 35%, transparent);
+    background-color: color-mix(in oklab, var(--color-gold-400) 35%, transparent);
     color: var(--color-white);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-violet-400);
+    outline: 2px solid var(--color-gold-300);
     outline-offset: 3px;
   }
 }
@@ -70,6 +88,47 @@
     background-color: color-mix(in oklab, var(--color-slate-900) 60%, transparent);
     border: 1px solid color-mix(in oklab, var(--color-white) 7%, transparent);
     box-shadow: inset 0 1px 0 0 color-mix(in oklab, var(--color-white) 6%, transparent);
+  }
+
+  /* Primary CTA: dark text on a gold fill. Every button that represents the
+     main action on its section (App Store download, notify-me submit)
+     should use this instead of repeating the utility list. */
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--color-gold-300);
+    color: var(--color-ink-950);
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 8px 30px -8px color-mix(in oklab, var(--color-gold-500) 50%, transparent);
+    transition: background-color 160ms var(--ease-out-strong);
+  }
+
+  .cta-primary:hover {
+    background-color: var(--color-gold-200);
+  }
+
+  /* Secondary CTA: outlined, gold-tinted on hover. */
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in oklab, var(--color-white) 10%, transparent);
+    color: var(--color-slate-200);
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+  }
+
+  .cta-secondary:hover {
+    border-color: color-mix(in oklab, var(--color-gold-300) 40%, transparent);
+    background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    color: var(--color-white);
   }
 
   /* Scroll reveal. Elements start visible so the page is readable without JS; the
