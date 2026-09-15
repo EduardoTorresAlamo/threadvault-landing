@@ -1,0 +1,46 @@
+---
+import { copy, type Lang } from "../i18n/copy";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = copy[lang].faq;
+const headingId = "faq-heading";
+---
+
+<section id="faq" class="scroll-mt-24 border-t border-white/[0.05] py-20 sm:py-28" aria-labelledby={headingId}>
+  <div class="mx-auto max-w-3xl px-5 sm:px-8">
+    <div class="text-center" data-reveal>
+      <p class="text-sm font-medium text-gold-300">{t.eyebrow}</p>
+      <h2 id={headingId} class="heading mt-3 text-3xl font-semibold text-white sm:text-4xl">
+        {t.title}
+      </h2>
+    </div>
+
+    <div class="mt-10 divide-y divide-white/[0.06] rounded-2xl border border-white/[0.06]">
+      {
+        t.items.map((item, index) => (
+          <details class="group p-5 sm:p-6" data-reveal style={`--reveal-delay: ${index * 40}ms`}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 marker:content-none">
+              <h3 class="text-sm font-medium text-slate-100">{item.q}</h3>
+              <svg
+                class="h-4 w-4 shrink-0 text-slate-500 transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path d="M8 3v10M3 8h10" />
+              </svg>
+            </summary>
+            <p class="lede mt-3 leading-relaxed text-slate-400">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
