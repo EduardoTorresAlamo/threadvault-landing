@@ -23,13 +23,35 @@ const lang = "es" as const;
     <h2 class="heading mt-10 text-xl font-semibold text-white">La página que compartiste</h2>
     <p class="lede mt-3 leading-relaxed text-slate-400">
       Para mostrar el título y la vista previa, ThreadVault descarga la página que guardaste,
-      igual que hace tu navegador. Solo HTTPS, sin cookies, sin sesión que persista.
+      igual que hace tu navegador. Solo HTTPS, sin cookies, sin sesión que persista y con
+      límites de tamaño en la respuesta. Esa descarga tiene una consecuencia: el sitio que
+      guardaste se entera de que alguien en tu dirección IP lo guardó.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Búsquedas oEmbed</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Cuando una página no trae vista previa propia, ThreadVault consulta el endpoint público de
+      oEmbed de TikTok, YouTube, Reddit o X. Sin token, sin cuenta.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Enlaces cortos</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Para expandir un enlace corto (por ejemplo de TikTok o Reddit) y encontrar la publicación
+      real, ThreadVault hace una única petición HEAD, siempre dentro del mismo dominio de la
+      plataforma.
+    </p>
+
+    <h2 class="heading mt-10 text-xl font-semibold text-white">Publicaciones incrustadas</h2>
+    <p class="lede mt-3 leading-relaxed text-slate-400">
+      Al abrir el detalle de una publicación guardada, ThreadVault carga el reproductor de esa
+      plataforma dentro de una vista web aislada. Las cookies no persisten entre sesiones, la
+      reproducción automática está desactivada y solo cruza un canal de mensajes hacia la app.
     </p>
 
     <h2 class="heading mt-10 text-xl font-semibold text-white">Búsqueda semántica</h2>
     <p class="lede mt-3 leading-relaxed text-slate-400">
-      Si la activas, Apple descarga una vez su modelo de embeddings. Después, todo el cálculo
-      ocurre en tu teléfono.
+      Si la activas, Apple descarga una vez su modelo de embeddings desde sus propios
+      servidores. Después, todo el cálculo ocurre en tu teléfono.
     </p>
 
     <h2 class="heading mt-10 text-xl font-semibold text-white">Lo que nunca sale</h2>
