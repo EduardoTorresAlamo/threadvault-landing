@@ -4,4 +4,4 @@ pages_build_output_dir = "dist"
 
 [[kv_namespaces]]
 binding = "NOTIFY"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "2a845270f125402f900472e9150a9726"
