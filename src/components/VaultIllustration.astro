@@ -26,42 +26,47 @@ const ariaLabel =
   into ThreadVault's own gold/emerald palette. No people, no rockets.
 -->
 <div class={className}>
-  <svg viewBox="0 0 600 600" role="img" aria-label={ariaLabel} class="h-auto w-full">
+  <svg viewBox="16 74 568 446" role="img" aria-label={ariaLabel} class="h-auto w-full">
     <!-- soft organic shapes, behind the stack -->
     <path
       d="M60,420 C40,320 120,240 220,250 C230,350 160,430 60,420 Z"
       fill="var(--color-gold-300)"
-      opacity="0.16"
+      opacity="0.18"
     ></path>
     <path
       d="M520,140 C560,220 520,310 430,320 C410,240 440,150 520,140 Z"
       fill="var(--color-emerald-400)"
-      opacity="0.14"
+      opacity="0.18"
     ></path>
 
-    <!-- back card -->
-    <g transform="rotate(-7 300 300)">
+    <!-- back card: fanned further out and lifted lighter than the front so it
+         reads as a distinct card instead of vanishing into the page background.
+         Rotated around the card's own center (300 260) so its corners peek out
+         evenly past both the left and right edges of the front card. -->
+    <g transform="rotate(-14 300 260)">
       <rect
         x="150"
         y="150"
         width="300"
         height="220"
         rx="26"
-        fill="var(--color-ink-950)"
-        stroke="color-mix(in oklab, var(--color-white) 6%, transparent)"
+        fill="color-mix(in oklab, var(--color-ink-900) 65%, var(--color-slate-800))"
+        stroke="color-mix(in oklab, var(--color-gold-300) 18%, transparent)"
+        stroke-width="1"
       ></rect>
     </g>
 
-    <!-- mid card -->
-    <g transform="rotate(-2.5 300 300)">
+    <!-- mid card: between back and front, both in fan angle and fill -->
+    <g transform="rotate(-7 300 260)">
       <rect
         x="150"
         y="150"
         width="300"
         height="220"
         rx="26"
-        fill="var(--color-ink-900)"
-        stroke="color-mix(in oklab, var(--color-white) 8%, transparent)"
+        fill="color-mix(in oklab, var(--color-ink-900) 80%, var(--color-slate-800))"
+        stroke="color-mix(in oklab, var(--color-gold-300) 18%, transparent)"
+        stroke-width="1"
       ></rect>
     </g>
 
