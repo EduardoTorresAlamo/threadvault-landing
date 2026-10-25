@@ -91,7 +91,7 @@
   }
 
   /* Primary CTA: dark text on a gold fill. Every button that represents the
-     main action on its section (App Store download, notify-me submit)
+     main action on its section (App Store coming-soon badge, notify-me submit)
      should use this instead of repeating the utility list. */
   .cta-primary {
     display: inline-flex;
