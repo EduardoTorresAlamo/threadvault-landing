@@ -34,7 +34,7 @@ export const copy = {
       titleLine2: "Todo lo que guardas,",
       titleLine3: "entendido.",
       lede: "Compartes un enlace y se acabó tu trabajo. ThreadVault lee el contenido, escribe el resumen, elige la categoría y saca las etiquetas, con el modelo que ya vive en tu iPhone.",
-      ctaPrimary: "Descargar en el App Store",
+      ctaPrimary: "Próximamente en el App Store",
       ctaSecondary: "Ver cómo funciona",
       footnote: "iOS 18 o superior. La clasificación necesita Apple Intelligence.",
     },
@@ -123,7 +123,7 @@ export const copy = {
     pricing: {
       eyebrow: "Precio",
       title: "Gratis para guardar. Pro para exprimirlo.",
-      note: "Precios en USD. Descarga ThreadVault gratis en el App Store.",
+      note: "Precios en USD. ThreadVault llegará pronto al App Store.",
       soon: "Próximamente",
       perMonth: "/mes",
       plans: [
@@ -233,7 +233,7 @@ export const copy = {
       titleLine2: "Everything you save,",
       titleLine3: "understood.",
       lede: "Share a link and your work is done. ThreadVault reads the content, writes the summary, picks the category and pulls the tags, using the model already living on your iPhone.",
-      ctaPrimary: "Download on the App Store",
+      ctaPrimary: "Coming soon to the App Store",
       ctaSecondary: "See how it works",
       footnote: "iOS 18 and later. Classification requires Apple Intelligence.",
     },
@@ -322,7 +322,7 @@ export const copy = {
     pricing: {
       eyebrow: "Pricing",
       title: "Free to save. Pro to go deeper.",
-      note: "Prices in USD. Download ThreadVault for free on the App Store.",
+      note: "Prices in USD. ThreadVault is coming soon to the App Store.",
       soon: "Coming soon",
       perMonth: "/month",
       plans: [
