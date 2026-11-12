@@ -21,7 +21,6 @@
      vaultBackground #0A0A0A, vaultCard #161616, vaultAccent #E8D5A3. */
   --color-vault: #0a0a0a;
   --color-vault-card: #161616;
-  --color-vault-raised: #1e1e1e;
 
   --color-gold-50: #fbf7ee;
   --color-gold-100: #f5ebd4;
@@ -31,14 +30,6 @@
   --color-gold-500: #cba753;
   --color-gold-600: #a98937;
   --color-gold-950: #2a2210;
-
-  /* Category accents used by the app's cards (VaultCard.categoryAccentColor). */
-  --color-cat-article: #7eb8f7;
-  --color-cat-video: #f97b7b;
-  --color-cat-image: #c47ef7;
-  --color-cat-code: #7ef7b2;
-  --color-cat-recipe: #f7c27e;
-  --color-cat-quote: #f77ebe;
 }
 
 @layer base {
@@ -146,18 +137,6 @@
     line-height: 1.25rem;
     color: var(--color-white);
     white-space: nowrap;
-  }
-
-  .chip-selected {
-    background-color: var(--color-gold-300);
-    border-color: transparent;
-    color: var(--color-vault);
-  }
-
-  .chip-count {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    opacity: 0.6;
   }
 
   /* Primary CTA: vault-dark text on a gold fill, as selected pills in the app. */

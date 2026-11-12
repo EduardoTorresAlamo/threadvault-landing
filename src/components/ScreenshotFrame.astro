@@ -25,6 +25,9 @@ const illustrative = copy[lang].features.illustrative;
 // from it is the project's public/screens/ in both `astro dev` and
 // `astro build`.
 //
+// The fallback mock is purely decorative (aria-hidden): the feature's h3 already
+// names it, and the visible caption flags it as an illustration.
+//
 // A real capture at public/screens/<name>.webp replaces the illustration
 // automatically; nothing else needs to change.
 const screenshotPath = fileURLToPath(
@@ -33,7 +36,7 @@ const screenshotPath = fileURLToPath(
 const hasScreenshot = existsSync(screenshotPath);
 
 // Native capture is 1320x2868 (iPhone 17 Pro Max); delivered files are
-// pre-scaled to 640x1392 (see docs/superpowers/specs/2026-09-15-landing-redesign-design.md §6).
+// pre-scaled to 640x1392 (see public/screens/README.md).
 const WIDTH = 640;
 const HEIGHT = 1392;
 
@@ -57,7 +60,7 @@ const chip = "h-[18px] rounded-full border border-white/[0.12] bg-white/[0.08]";
             class="h-full w-full object-cover"
           />
         ) : (
-          <div class="flex h-full w-full flex-col px-3 pt-3" role="img" aria-label={alt}>
+          <div class="flex h-full w-full flex-col px-3 pt-3" aria-hidden="true">
             <span class="mx-auto mb-3 block h-1.5 w-12 rounded-full bg-white/[0.14]" />
 
             {name === "classify" && (
