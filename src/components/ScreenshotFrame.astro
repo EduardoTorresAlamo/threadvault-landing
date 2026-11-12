@@ -1,6 +1,8 @@
 ---
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { copy } from "../i18n/copy";
+import MockCard from "./MockCard.astro";
 
 interface Props {
   /** File stem under public/screens/, without extension, e.g. "classify". */
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const { name, alt } = Astro.props;
+const lang = Astro.currentLocale === "en" ? "en" : "es";
+const illustrative = copy[lang].features.illustrative;
 
 // Astro component frontmatter runs in Node at build time, so this check
 // happens once per `astro build` (and once per request in `astro dev`, which
@@ -20,52 +24,183 @@ const { name, alt } = Astro.props;
 // lives at src/components/ScreenshotFrame.astro, so `../../public/screens/`
 // from it is the project's public/screens/ in both `astro dev` and
 // `astro build`.
+//
+// The fallback mock is purely decorative (aria-hidden): the feature's h3 already
+// names it, and the visible caption flags it as an illustration.
+//
+// A real capture at public/screens/<name>.webp replaces the illustration
+// automatically; nothing else needs to change.
 const screenshotPath = fileURLToPath(
   new URL(`../../public/screens/${name}.webp`, import.meta.url),
 );
 const hasScreenshot = existsSync(screenshotPath);
 
 // Native capture is 1320x2868 (iPhone 17 Pro Max); delivered files are
-// pre-scaled to 640x1392 (see docs/superpowers/specs/2026-09-15-landing-redesign-design.md §6).
+// pre-scaled to 640x1392 (see public/screens/README.md).
 const WIDTH = 640;
 const HEIGHT = 1392;
+
+const chip = "h-[18px] rounded-full border border-white/[0.12] bg-white/[0.08]";
 ---
 
-<div
-  class="mx-auto w-[9rem] overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-ink-950 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] sm:w-[10rem]"
->
-  <div class="aspect-[640/1392] w-full">
-    {
-      hasScreenshot ? (
-        <img
-          src={`/screens/${name}.webp`}
-          alt={alt}
-          width={WIDTH}
-          height={HEIGHT}
-          loading="lazy"
-          decoding="async"
-          class="h-full w-full object-cover"
-        />
-      ) : (
-        <div
-          class="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-ink-900 to-ink-950 text-center"
-          role="img"
-          aria-label={alt}
-        >
-          <svg
-            class="h-6 w-6 text-gold-300/50"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
-            <rect x="5" y="3" width="14" height="18" rx="2" />
-            <path d="M9 18h6" />
-          </svg>
-          <p class="px-3 text-[0.6rem] leading-tight text-slate-600">Screenshot: {name}</p>
-        </div>
-      )
-    }
+<figure class="mx-auto w-[10.5rem] sm:w-[11.5rem]">
+  <div
+    class="relative overflow-hidden rounded-[2rem] border border-white/[0.12] bg-vault shadow-[0_28px_60px_-24px_rgba(0,0,0,0.9)]"
+  >
+    <div class="aspect-[640/1392] w-full">
+      {
+        hasScreenshot ? (
+          <img
+            src={`/screens/${name}.webp`}
+            alt={alt}
+            width={WIDTH}
+            height={HEIGHT}
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+        ) : (
+          <div class="flex h-full w-full flex-col px-3 pt-3" aria-hidden="true">
+            <span class="mx-auto mb-3 block h-1.5 w-12 rounded-full bg-white/[0.14]" />
+
+            {name === "classify" && (
+              <div class="flex flex-1 flex-col gap-3">
+                <div class="vault-card" style="border-radius:14px">
+                  <div
+                    class="relative h-28"
+                    style="background:linear-gradient(160deg,#7eb8f726,#7eb8f70d)"
+                  >
+                    <span class="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-md border border-[#7eb8f780]" />
+                    <span class="absolute right-2 top-2 flex h-4 items-center gap-1 rounded-full bg-white/[0.14] px-1.5">
+                      <span class="h-1.5 w-1.5 rounded-full bg-gold-300" />
+                      <span class="h-1 w-6 rounded-full bg-white/50" />
+                    </span>
+                  </div>
+                  <div class="space-y-1.5 px-3 pb-3 pt-2.5">
+                    <span class="block h-2 w-11/12 rounded-full bg-white/80" />
+                    <span class="block h-2 w-2/3 rounded-full bg-white/80" />
+                    <span class="flex items-center gap-1 pt-1">
+                      <span class="h-1.5 w-1.5 rounded-full bg-[#7eb8f7]" />
+                      <span class="h-1 w-10 rounded-full bg-white/[0.35]" />
+                    </span>
+                  </div>
+                </div>
+                <div class="space-y-1.5 px-1">
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.28]" />
+                  <span class="block h-1.5 w-11/12 rounded-full bg-white/[0.28]" />
+                  <span class="block h-1.5 w-4/5 rounded-full bg-white/[0.28]" />
+                  <span class="block h-1.5 w-2/3 rounded-full bg-white/[0.28]" />
+                </div>
+                <div class="flex flex-wrap gap-1.5 px-1">
+                  <span class={`${chip} w-12`} />
+                  <span class={`${chip} w-16`} />
+                  <span class={`${chip} w-10`} />
+                  <span class={`${chip} w-14`} />
+                </div>
+              </div>
+            )}
+
+            {name === "tags" && (
+              <div class="flex flex-1 flex-col gap-3">
+                <div class="-mx-3 flex gap-1.5 overflow-hidden px-3">
+                  <span class="h-[18px] w-9 shrink-0 rounded-full bg-gold-300" />
+                  <span class={`${chip} w-14 shrink-0`} />
+                  <span class={`${chip} w-12 shrink-0`} />
+                  <span class={`${chip} w-16 shrink-0`} />
+                  <span class={`${chip} w-12 shrink-0`} />
+                </div>
+                <div class="grid grid-cols-2 items-start gap-2">
+                  <div class="space-y-2">
+                    <MockCard tint="#7eb8f7" media="h-16" lines={2} />
+                    <MockCard tint="#c47ef7" media="h-24" lines={1} />
+                    <MockCard tint="#7ef7b2" media="h-12" lines={2} />
+                  </div>
+                  <div class="space-y-2">
+                    <MockCard tint="#f97b7b" media="h-24" lines={2} badge />
+                    <MockCard tint="#f7c27e" media="h-12" lines={3} />
+                    <MockCard tint="#7eb8f7" media="h-16" lines={1} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {name === "search" && (
+              <div class="flex flex-1 flex-col gap-3">
+                <div class="flex h-7 items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.08] px-3">
+                  <svg
+                    class="h-3 w-3 text-white/50"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="7" cy="7" r="4.5" />
+                    <path d="m10.5 10.5 3 3" />
+                  </svg>
+                  <span class="h-1.5 w-14 rounded-full bg-white/60" />
+                </div>
+                <MockCard tint="#7eb8f7" media="h-14" lines={2} radius={14} />
+                <div class="flex items-center gap-2 px-1">
+                  <span class="h-px flex-1 bg-white/[0.12]" />
+                  <svg class="h-2.5 w-2.5 text-gold-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2l2.4 7.1L22 12l-7.6 2.9L12 22l-2.4-7.1L2 12l7.6-2.9z" />
+                  </svg>
+                  <span class="h-px flex-1 bg-white/[0.12]" />
+                </div>
+                <div class="grid grid-cols-2 items-start gap-2 opacity-70">
+                  <MockCard tint="#c47ef7" media="h-12" lines={2} />
+                  <MockCard tint="#f7c27e" media="h-16" lines={1} />
+                </div>
+              </div>
+            )}
+
+            {name === "reader" && (
+              <div class="flex flex-1 flex-col gap-3 px-1.5">
+                <div class="space-y-2">
+                  <span class="block h-3 w-full rounded-full bg-white/90" />
+                  <span class="block h-3 w-3/4 rounded-full bg-white/90" />
+                  <span class="flex items-center gap-1.5 pt-1">
+                    <span class="h-1 w-10 rounded-full bg-white/[0.35]" />
+                    <span class="h-1 w-1 rounded-full bg-white/20" />
+                    <span class="h-1 w-8 rounded-full bg-white/[0.35]" />
+                  </span>
+                  <span class="block h-px w-full bg-white/[0.12]" />
+                </div>
+                <div class="space-y-[7px]">
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-11/12 rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-2/3 rounded-full bg-white/[0.4]" />
+                </div>
+                <div class="space-y-[7px]">
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-10/12 rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-1/2 rounded-full bg-white/[0.4]" />
+                </div>
+                <div class="space-y-[7px]">
+                  <span class="block h-1.5 w-full rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-11/12 rounded-full bg-white/[0.4]" />
+                  <span class="block h-1.5 w-3/5 rounded-full bg-white/[0.4]" />
+                </div>
+              </div>
+            )}
+
+            <span class="mx-auto mb-3 mt-3 block h-1 w-16 rounded-full bg-white/[0.2]" />
+          </div>
+        )
+      }
+    </div>
   </div>
-</div>
+  {
+    !hasScreenshot && (
+      <figcaption class="mt-3 text-center font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-neutral-400">
+        {illustrative}
+      </figcaption>
+    )
+  }
+</figure>

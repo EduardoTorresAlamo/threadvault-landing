@@ -11,5 +11,7 @@ sips -Z 1392 capture-classify.png --out /tmp/classify.png
 cwebp -q 82 /tmp/classify.png -o public/screens/classify.webp
 ```
 
-See docs/superpowers/specs/2026-09-15-landing-redesign-design.md, section 6, for what each file
-should show and the full size/quality rationale.
+Each file shows the matching feature: `classify` (a saved link with its category and summary),
+`tags` (the tag filter row over the card grid), `search` (a search query with results), `reader`
+(the reading view). Files are 640x1392 WebP at quality 82; `ScreenshotFrame.astro` renders them at
+that size with a 640/1392 aspect ratio.
