@@ -1,5 +1,7 @@
 # ThreadVault Landing Redesign Implementation Plan
 
+> Historical document. The Pricing section, the Free/Pro plans and the claims about iCloud sync and Markdown export described below were removed afterwards: none of them exists in the app. The current palette is the app's own (#0A0A0A, #161616, #E8D5A3).
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Restructure the ThreadVault landing page to the reference template's layout (split hero, value props, card grids, single highlighted pricing plan, CTA banner, rich footer) while keeping the existing dark palette, swapping violet for the app's gold accent, replacing the hero's HTML mockup with an original inline SVG illustration, adding real screenshots to Features, adding a Privacy section, an Android email-capture waitlist backed by a Cloudflare Pages Function + KV, and an FAQ.

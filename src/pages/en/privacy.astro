@@ -4,65 +4,63 @@ import { copy } from "../../i18n/copy";
 
 const lang = "en" as const;
 const t = copy[lang].meta.privacyPage;
+
+const sections = [
+  {
+    title: "AI classification",
+    body: "Runs on your iPhone with Apple Intelligence. What you save is never sent to a model over the internet, under any configuration. If your device is not eligible, ThreadVault still saves and searches, just without a summary, category or tags.",
+  },
+  {
+    title: "The page you shared",
+    body: "To show the title and preview, ThreadVault downloads the page you saved, the same thing your browser does. HTTPS only, no cookies, no session that persists, and the response is size-capped. That download has one consequence worth naming: the site you saved learns that someone at your IP address saved it. Reddit is requested twice per post, both times from Reddit itself.",
+  },
+  {
+    title: "oEmbed lookups",
+    body: "When a page ships no preview of its own, ThreadVault asks the public oEmbed endpoint of TikTok, YouTube, Reddit or X instead. No token, no account.",
+  },
+  {
+    title: "Short links",
+    body: "To expand a short link (from TikTok or Reddit, for example) and find the real post behind it, ThreadVault sends a single HEAD request. HTTPS only, no cookies, and the result is used only if it is a post on a supported platform.",
+  },
+  {
+    title: "Embedded posts",
+    body: "Opening a saved YouTube, TikTok, Instagram, Threads, Reddit, X or Facebook post loads that platform's player inside a sandboxed web view. Cookies do not persist between sessions, autoplay is off, and only one message channel crosses back to the app.",
+  },
+  {
+    title: "Semantic search",
+    body: "It ships turned off. If you turn it on, Apple downloads its embedding model once, from Apple's own servers. After that, every calculation happens on your phone and your queries are never sent anywhere.",
+  },
+  {
+    title: "What never leaves",
+    body: "Your summaries, categories, tags, article text and saved images live only on your iPhone. The share extension and the widget make no network requests at all.",
+  },
+];
 ---
 
 <Layout lang={lang} title={t.title} description={t.description}>
   <article class="mx-auto max-w-2xl px-5 py-32 sm:px-8 sm:py-40">
-    <h1 class="display text-4xl font-semibold text-white">Privacy</h1>
+    <p class="eyebrow">{copy[lang].privacy.eyebrow}</p>
+    <h1 class="display mt-3 text-4xl font-semibold text-white sm:text-5xl">Privacy</h1>
 
-    <p class="lede mt-6 leading-relaxed text-slate-400">
+    <p class="lede mt-6 text-lg leading-relaxed text-neutral-300">
       ThreadVault has no server, no accounts, no analytics and no advertising. This is exactly
       what the app can send over the network.
     </p>
 
-    <h2 class="heading mt-10 text-xl font-semibold text-white">AI classification</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      Runs on your iPhone with Apple Intelligence. What you save is never sent to a model over the
-      internet, under any configuration. If your device is not eligible, ThreadVault still saves
-      and searches, just without a summary or category.
-    </p>
+    <div class="vault-card mt-10 divide-y divide-white/[0.07]" style="border-radius:22px">
+      {
+        sections.map((section) => (
+          <section class="p-6 sm:p-8">
+            <h2 class="heading text-lg font-semibold text-white">{section.title}</h2>
+            <p class="lede mt-2.5 leading-relaxed text-neutral-400">{section.body}</p>
+          </section>
+        ))
+      }
+    </div>
 
-    <h2 class="heading mt-10 text-xl font-semibold text-white">The page you shared</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      To show the title and preview, ThreadVault downloads the page you saved, the same thing your
-      browser does. HTTPS only, no cookies, no session that persists, and the response is
-      size-capped. That download has one consequence worth naming: the site you saved learns
-      that someone at your IP address saved it.
-    </p>
-
-    <h2 class="heading mt-10 text-xl font-semibold text-white">oEmbed lookups</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      When a page ships no preview of its own, ThreadVault asks the public oEmbed endpoint of
-      TikTok, YouTube, Reddit or X instead. No token, no account.
-    </p>
-
-    <h2 class="heading mt-10 text-xl font-semibold text-white">Short links</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      To expand a short link (from TikTok or Reddit, for example) and find the real post behind
-      it, ThreadVault sends a single HEAD request, always on the same platform's domain.
-    </p>
-
-    <h2 class="heading mt-10 text-xl font-semibold text-white">Embedded posts</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      Opening a saved post's detail view loads that platform's player inside a sandboxed web
-      view. Cookies do not persist between sessions, autoplay is off, and only one message
-      channel crosses back to the app.
-    </p>
-
-    <h2 class="heading mt-10 text-xl font-semibold text-white">Semantic search</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      If you turn it on, Apple downloads its embedding model once, from Apple's own servers.
-      After that, every calculation happens on your phone.
-    </p>
-
-    <h2 class="heading mt-10 text-xl font-semibold text-white">What never leaves</h2>
-    <p class="lede mt-3 leading-relaxed text-slate-400">
-      Your summaries, categories, tags, article text and saved images live only on your iPhone.
-    </p>
-
-    <p class="lede mt-10 text-sm text-slate-400">
+    <p class="lede mt-10 text-sm text-neutral-400">
       Questions? Write to <a
-        class="pressable text-gold-300 hover:text-gold-200"
+        class="pressable text-gold-300 underline-offset-4 hover:text-gold-200 hover:underline"
         href="mailto:torreseduardo804@gmail.com?subject=ThreadVault">torreseduardo804@gmail.com</a
       >.
     </p>

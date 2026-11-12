@@ -1,5 +1,7 @@
 # ThreadVault Landing Redesign: Design Spec
 
+> Historical document. The Pricing section, the Free/Pro plans and the claims about iCloud sync and Markdown export described below were removed afterwards: none of them exists in the app. The current palette is the app's own (#0A0A0A, #161616, #E8D5A3).
+
 ## 1. Goal and what changes
 
 Today's site (Astro 7 + Tailwind v4, `es` default at `/`, `en` at `/en/`) is
