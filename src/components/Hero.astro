@@ -10,38 +10,36 @@ const { lang } = Astro.props;
 const t = copy[lang].hero;
 ---
 
-<section class="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
-  <!-- One soft light source behind the illustration, low enough to read as depth. -->
+<section class="relative isolate overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+  <!-- Soft light source from the top, the icon's gradient scaled up to the page. -->
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[46rem] w-[70rem] -translate-x-1/2"
-    style="background: radial-gradient(50% 50% at 50% 32%, color-mix(in oklab, var(--color-gold-500) 15%, transparent), transparent 70%);"
+    class="pointer-events-none absolute left-1/2 top-0 -z-10 h-[48rem] w-[80rem] -translate-x-1/2"
+    style="background: radial-gradient(48% 52% at 62% 30%, color-mix(in oklab, var(--color-gold-500) 13%, transparent), transparent 70%), radial-gradient(40% 40% at 20% 10%, color-mix(in oklab, var(--color-white) 5%, transparent), transparent 70%);"
   >
   </div>
 
   <div
-    class="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20"
+    class="mx-auto grid max-w-6xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12"
   >
     <div data-reveal>
-      <p
-        class="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.07] px-3 py-1 text-xs font-medium text-emerald-300"
-      >
-        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+      <p class="chip">
+        <span class="h-1.5 w-1.5 rounded-full bg-gold-300"></span>
         {t.badge}
       </p>
 
-      <h1 class="display mt-6 text-[2.6rem] font-semibold text-white sm:text-6xl">
+      <h1 class="display mt-6 text-[2.75rem] font-semibold text-white sm:text-6xl lg:text-[4.25rem]">
         {t.titleLine1}<br />
-        <span class="text-slate-500">{t.titleLine2}</span><br />
-        <span class="text-slate-500">{t.titleLine3}</span>
+        <span class="text-neutral-400">{t.titleLine2}</span><br />
+        <span class="text-gold-300">{t.titleLine3}</span>
       </h1>
 
-      <p class="lede mt-6 max-w-xl text-[1.05rem] leading-relaxed text-slate-400 sm:text-lg">
+      <p class="lede mt-6 max-w-xl text-[1.05rem] leading-relaxed text-neutral-300 sm:text-lg">
         {t.lede}
       </p>
 
       <div class="mt-9 flex flex-wrap items-center gap-3">
-        <span class="cta-primary cursor-default" aria-disabled="true">
+        <span class="cta-primary cursor-default">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
               d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.6 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.6.7 2.8.7 1.1 0 1.9-1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.5-.1 0-2.2-.9-2.2-3.2zM14.2 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"
@@ -53,7 +51,7 @@ const t = copy[lang].hero;
         <a href="#how" class="cta-secondary pressable">
           {t.ctaSecondary}
           <svg
-            class="h-4 w-4 text-slate-500"
+            class="h-4 w-4 text-neutral-400"
             viewBox="0 0 16 16"
             fill="none"
             stroke="currentColor"
@@ -67,11 +65,11 @@ const t = copy[lang].hero;
         </a>
       </div>
 
-      <p class="mt-5 text-sm text-slate-600">{t.footnote}</p>
+      <p class="mt-6 max-w-md text-sm leading-relaxed text-neutral-400">{t.footnote}</p>
     </div>
 
     <div
-      class="w-[min(85vw,420px)] justify-self-center sm:w-[26rem] lg:w-[31.25rem] lg:justify-self-end"
+      class="w-[min(78vw,380px)] justify-self-center lg:w-[min(100%,440px)] lg:justify-self-end"
       data-reveal
       style="--reveal-delay: 90ms"
     >

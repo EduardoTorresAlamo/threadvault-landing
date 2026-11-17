@@ -7,13 +7,31 @@ export const defaultLang: Lang = "es";
 /** `/` is Spanish, `/en/` is English. */
 export const pathFor = (lang: Lang) => (lang === "es" ? "/" : "/en/");
 
+/*
+ * Every feature claim below maps to code in the iOS app:
+ *  - share sheet: links (web URL, or plain text that is a URL) and images
+ *    (ThreadVaultShareExtension/ShareViewController.swift)
+ *  - notes: typed in the app's add sheet (MainDashboard.swift) or spoken to
+ *    Siri / Shortcuts (Intents/SaveToVaultIntent.swift, ThreadVaultShortcuts.swift)
+ *  - summary / category / tags: Apple Intelligence via FoundationModels
+ *    (Intelligence/AppleIntelligenceProvider.swift); images are described with
+ *    Vision labels + OCR first (Intelligence/ImageDescriber.swift)
+ *  - tag filter with counts, AND semantics, favourites (Views/TagFilterBar.swift)
+ *  - literal search, optional semantic "related" results below exact matches
+ *    (Views/MainDashboard.swift, Views/SemanticSearchSettings.swift)
+ *  - Reader view for extracted article text (Views/ReaderView.swift)
+ *  - inline embeds: YouTube, TikTok, Instagram, Threads, Reddit, X, Facebook
+ *    (Utilities/EmbeddableMedia.swift)
+ *  - "Rediscover" widget (ThreadVaultWidget/ThreadVaultWidget.swift)
+ * Not in the app, so never claimed here: iCloud sync, Markdown export.
+ */
 export const copy = {
   es: {
     htmlLang: "es",
     meta: {
       title: "ThreadVault: Tu memoria digital",
       description:
-        "Guarda enlaces, textos e imágenes desde cualquier app. ThreadVault los resume, los clasifica y los etiqueta en tu iPhone. Sin cuentas, sin servidores.",
+        "Guarda enlaces, imágenes y notas desde cualquier app. ThreadVault los resume, los clasifica y los etiqueta en tu iPhone. Sin cuentas, sin servidores.",
       privacyPage: {
         title: "Privacidad: ThreadVault",
         description:
@@ -23,20 +41,20 @@ export const copy = {
     nav: {
       features: "Funciones",
       how: "Cómo funciona",
-      pricing: "Precio",
       faq: "FAQ",
       skip: "Saltar al contenido",
       langLabel: "Idioma",
     },
     hero: {
-      badge: "Procesamiento 100 % en el dispositivo",
+      badge: "Clasificación en el dispositivo",
       titleLine1: "Tu memoria digital.",
       titleLine2: "Todo lo que guardas,",
       titleLine3: "entendido.",
       lede: "Compartes un enlace y se acabó tu trabajo. ThreadVault lee el contenido, escribe el resumen, elige la categoría y saca las etiquetas, con el modelo que ya vive en tu iPhone.",
       ctaPrimary: "Próximamente en el App Store",
       ctaSecondary: "Ver cómo funciona",
-      footnote: "iOS 18 o superior. La clasificación necesita Apple Intelligence.",
+      footnote:
+        "iOS 18 o superior. El resumen, la categoría y las etiquetas requieren Apple Intelligence (iOS 26 y un iPhone compatible).",
     },
     values: {
       eyebrow: "Por qué ThreadVault",
@@ -51,13 +69,14 @@ export const copy = {
         },
         {
           title: "Guarda desde cualquier app",
-          body: "La extensión de compartir de iOS acepta enlaces, texto e imágenes desde cualquier app.",
+          body: "La hoja de compartir de iOS acepta enlaces e imágenes desde cualquier app. Las notas, desde ThreadVault o con Siri.",
         },
       ],
     },
     features: {
       eyebrow: "Funciones",
       title: "Cuatro cosas, hechas bien",
+      illustrative: "Ilustración",
       items: [
         {
           title: "Resumen y categoría",
@@ -66,18 +85,33 @@ export const copy = {
         },
         {
           title: "Etiquetas y filtro",
-          body: "Las etiquetas salen del contenido y se cuentan. Filtra el vault por una o varias a la vez, desde la barra de arriba.",
+          body: "Las etiquetas salen del contenido y se cuentan. Filtra el vault por una o varias a la vez, o quédate solo con tus favoritos, desde la barra de arriba.",
           screenshot: "tags",
         },
         {
-          title: "Búsqueda, incluida la semántica",
-          body: "Busca por palabra exacta o por lo que recuerdas. Las coincidencias literales van primero, las relacionadas debajo, nunca mezcladas.",
+          title: "Búsqueda, y semántica si la activas",
+          body: "Busca por palabra exacta. Si activas la búsqueda semántica, los elementos relacionados aparecen debajo de las coincidencias literales, nunca mezclados.",
           screenshot: "search",
         },
         {
-          title: "Lector y contenido incrustado",
-          body: "Abre cualquier elemento en una vista de lectura sin distracciones, o mira el video o la publicación incrustada, sin salir de la app.",
+          title: "Lector y publicaciones incrustadas",
+          body: "Abre un artículo en una vista de lectura sin distracciones, o mira el video o la publicación de YouTube, TikTok, Instagram, Threads, Reddit, X o Facebook sin salir de la app.",
           screenshot: "reader",
+        },
+      ],
+      moreTitle: "Y además",
+      more: [
+        {
+          title: "Widget Redescubre",
+          body: "Un widget que va devolviendo a la vista lo que guardaste, a lo largo del día.",
+        },
+        {
+          title: "Siri y Atajos",
+          body: "Guarda un enlace o una nota sin abrir la app. ThreadVault lo clasifica y te dice la categoría.",
+        },
+        {
+          title: "Capturas e imágenes",
+          body: "Guarda una imagen y ThreadVault lee su texto y lo que muestra, en el dispositivo, para clasificarla.",
         },
       ],
     },
@@ -87,7 +121,7 @@ export const copy = {
       steps: [
         {
           title: "Guarda",
-          body: "Compartir → ThreadVault. Enlace, texto o imagen, desde cualquier app de iOS.",
+          body: "Compartir → ThreadVault. Un enlace o una imagen, desde cualquier app de iOS. Las notas, desde la app o con Siri.",
         },
         {
           title: "Organiza",
@@ -95,7 +129,7 @@ export const copy = {
         },
         {
           title: "Encuentra",
-          body: "Busca, filtra por etiqueta, o deja que el widget te devuelva lo que guardaste y olvidaste.",
+          body: "Busca, filtra por etiqueta o por favoritos, o deja que el widget te devuelva lo que guardaste y olvidaste.",
         },
       ],
     },
@@ -114,49 +148,11 @@ export const copy = {
       leaves: [
         "Una petición HTTPS para descargar la página que compartiste, igual que hace un navegador. Solo HTTPS, sin cookies y con límites de tamaño; el sitio se entera de que alguien en tu IP la guardó.",
         "Una búsqueda oEmbed en TikTok, YouTube, Reddit o X cuando la página no trae vista previa propia. Sin token ni cuenta.",
-        "Una petición HEAD al enlace corto para encontrar la publicación real detrás, siempre dentro del mismo dominio de la plataforma.",
+        "Una petición HEAD al enlace corto para encontrar la publicación real detrás. Solo HTTPS, sin cookies.",
         "Al abrir una publicación guardada, el reproductor de esa plataforma corre en una vista web aislada: cookies no persistentes, sin reproducción automática y un solo canal de mensajes hacia la app.",
         "Si activas la búsqueda semántica, una descarga única del modelo de Apple desde los servidores de Apple. Después, todo el cálculo es local.",
       ],
       policyLink: "Lee la política completa",
-    },
-    pricing: {
-      eyebrow: "Precio",
-      title: "Gratis para guardar. Pro para exprimirlo.",
-      note: "Precios en USD. ThreadVault llegará pronto al App Store.",
-      soon: "Próximamente",
-      perMonth: "/mes",
-      plans: [
-        {
-          name: "Free",
-          price: "$0",
-          tagline: "Todo el vault, sin límite de elementos.",
-          featured: false,
-          cta: "Incluido desde el día uno",
-          features: [
-            "Guardado ilimitado",
-            "Resumen y categoría en el dispositivo",
-            "Búsqueda por texto",
-            "Extensión de compartir",
-            "Widget de inicio",
-          ],
-        },
-        {
-          name: "Pro",
-          price: "$4,99",
-          tagline: "Para vaults que pasan de mil elementos.",
-          featured: true,
-          badge: "Mejor valor",
-          cta: "Próximamente",
-          features: [
-            "Todo lo de Free",
-            "Búsqueda semántica",
-            "Sincronización por iCloud",
-            "Exportación a Markdown",
-            "Vista de lectura sin distracciones",
-          ],
-        },
-      ],
     },
     android: {
       eyebrow: "Android",
@@ -179,23 +175,19 @@ export const copy = {
         },
         {
           q: "¿Mis datos salen de mi iPhone?",
-          a: "No para la clasificación. La IA corre en el dispositivo. Lo único que sale es la petición para descargar la página que compartiste.",
+          a: "No para la clasificación. La IA corre en el dispositivo. Lo que sale por la red está listado en la política de privacidad: sobre todo, la petición para descargar la página que compartiste.",
         },
         {
           q: "¿Qué necesito para la clasificación con IA?",
-          a: "iOS 18 o superior, un iPhone compatible con Apple Intelligence y tenerla activada en Ajustes. Sin eso, ThreadVault sigue guardando y buscando, pero sin resumen ni categoría.",
+          a: "Un iPhone compatible con Apple Intelligence, iOS 26 y tenerla activada en Ajustes. Sin eso, ThreadVault sigue guardando, mostrando vistas previas y buscando por texto, pero sin resumen, categoría ni etiquetas.",
         },
         {
-          q: "¿Qué diferencia hay entre Free y Pro?",
-          a: "Free guarda sin límite y clasifica en el dispositivo. Pro añade búsqueda semántica, sincronización por iCloud, exportación a Markdown y vista de lectura.",
+          q: "¿Qué puedo guardar?",
+          a: "Enlaces e imágenes desde la hoja de compartir de iOS, y notas escritas en la app o dictadas a Siri.",
         },
         {
           q: "¿Habrá versión para Android?",
           a: "Está en desarrollo, con IA híbrida en el dispositivo, Gemini Nano y Gemma 4. Déjanos tu correo más abajo y te avisamos.",
-        },
-        {
-          q: "¿Cómo cancelo Pro?",
-          a: "Desde Ajustes de tu cuenta de Apple, como cualquier suscripción del App Store. ThreadVault no gestiona pagos ni puede cobrarte fuera de ahí.",
         },
       ],
     },
@@ -212,7 +204,7 @@ export const copy = {
     meta: {
       title: "ThreadVault: Your digital memory",
       description:
-        "Save links, text and images from any app. ThreadVault summarises, files and tags them on your iPhone. No account, no server.",
+        "Save links, images and notes from any app. ThreadVault summarises, files and tags them on your iPhone. No account, no server.",
       privacyPage: {
         title: "Privacy: ThreadVault",
         description:
@@ -222,20 +214,20 @@ export const copy = {
     nav: {
       features: "Features",
       how: "How it works",
-      pricing: "Pricing",
       faq: "FAQ",
       skip: "Skip to content",
       langLabel: "Language",
     },
     hero: {
-      badge: "Runs entirely on device",
+      badge: "Classifies on device",
       titleLine1: "Your digital memory.",
       titleLine2: "Everything you save,",
       titleLine3: "understood.",
       lede: "Share a link and your work is done. ThreadVault reads the content, writes the summary, picks the category and pulls the tags, using the model already living on your iPhone.",
       ctaPrimary: "Coming soon to the App Store",
       ctaSecondary: "See how it works",
-      footnote: "iOS 18 and later. Classification requires Apple Intelligence.",
+      footnote:
+        "iOS 18 and later. Summary, category and tags require Apple Intelligence (iOS 26 and a supported iPhone).",
     },
     values: {
       eyebrow: "Why ThreadVault",
@@ -250,13 +242,14 @@ export const copy = {
         },
         {
           title: "Save from any app",
-          body: "iOS's share sheet takes links, text and images from any app you're using.",
+          body: "iOS's share sheet takes links and images from any app you're using. Notes, from ThreadVault itself or with Siri.",
         },
       ],
     },
     features: {
       eyebrow: "Features",
       title: "Four things, done properly",
+      illustrative: "Illustration",
       items: [
         {
           title: "Summary and category",
@@ -265,18 +258,33 @@ export const copy = {
         },
         {
           title: "Tags and filter",
-          body: "Tags are pulled from the content and counted. Filter the vault by one or several at once, from the bar up top.",
+          body: "Tags are pulled from the content and counted. Filter the vault by one or several at once, or keep only your favourites, from the bar up top.",
           screenshot: "tags",
         },
         {
-          title: "Search, semantic included",
-          body: "Search by exact word or by what you remember. Literal matches come first, related ones below, never blended.",
+          title: "Search, semantic if you turn it on",
+          body: "Search by exact word. Turn on semantic search and related items appear below the literal matches, never blended in.",
           screenshot: "search",
         },
         {
-          title: "Reader and embedded content",
-          body: "Open any item in a distraction-free reading view, or watch the embedded video or post, without leaving the app.",
+          title: "Reader and embedded posts",
+          body: "Open an article in a distraction-free reading view, or watch the YouTube, TikTok, Instagram, Threads, Reddit, X or Facebook video or post without leaving the app.",
           screenshot: "reader",
+        },
+      ],
+      moreTitle: "And also",
+      more: [
+        {
+          title: "Rediscover widget",
+          body: "A widget that keeps bringing what you saved back into view as the day goes on.",
+        },
+        {
+          title: "Siri and Shortcuts",
+          body: "Save a link or a note without opening the app. ThreadVault classifies it and tells you the category.",
+        },
+        {
+          title: "Screenshots and images",
+          body: "Save an image and ThreadVault reads its text and what it shows, on device, to classify it.",
         },
       ],
     },
@@ -286,7 +294,7 @@ export const copy = {
       steps: [
         {
           title: "Save",
-          body: "Share → ThreadVault. A link, some text or an image, from any iOS app.",
+          body: "Share → ThreadVault. A link or an image, from any iOS app. Notes, from the app or with Siri.",
         },
         {
           title: "Organise",
@@ -294,7 +302,7 @@ export const copy = {
         },
         {
           title: "Find",
-          body: "Search, filter by tag, or let the widget hand back something you saved and forgot.",
+          body: "Search, filter by tag or favourites, or let the widget hand back something you saved and forgot.",
         },
       ],
     },
@@ -313,49 +321,11 @@ export const copy = {
       leaves: [
         "One HTTPS request to fetch the page you shared, the same thing a browser does. HTTPS only, no cookies, size-capped; the site learns someone at your IP saved it.",
         "An oEmbed lookup on TikTok, YouTube, Reddit or X when the page ships no preview of its own. No token, no account.",
-        "One HEAD request to the short link to find the real post behind it, always on the same platform's domain.",
+        "One HEAD request to the short link to find the real post behind it. HTTPS only, no cookies.",
         "Opening a saved post runs that platform's player in a sandboxed web view: non-persistent cookies, autoplay off, and one message channel back to the app.",
         "If you turn on semantic search, a one-time download of Apple's model from Apple's own servers. After that, every calculation stays local.",
       ],
       policyLink: "Read the full policy",
-    },
-    pricing: {
-      eyebrow: "Pricing",
-      title: "Free to save. Pro to go deeper.",
-      note: "Prices in USD. ThreadVault is coming soon to the App Store.",
-      soon: "Coming soon",
-      perMonth: "/month",
-      plans: [
-        {
-          name: "Free",
-          price: "$0",
-          tagline: "The whole vault, with no item limit.",
-          featured: false,
-          cta: "Included from day one",
-          features: [
-            "Unlimited saves",
-            "On-device summary and category",
-            "Text search",
-            "Share extension",
-            "Home screen widget",
-          ],
-        },
-        {
-          name: "Pro",
-          price: "$4.99",
-          tagline: "For vaults past a thousand items.",
-          featured: true,
-          badge: "Best value",
-          cta: "Coming soon",
-          features: [
-            "Everything in Free",
-            "Semantic search",
-            "iCloud sync",
-            "Markdown export",
-            "Distraction-free reader",
-          ],
-        },
-      ],
     },
     android: {
       eyebrow: "Android",
@@ -378,23 +348,19 @@ export const copy = {
         },
         {
           q: "Does my data leave my iPhone?",
-          a: "Not for classification. The AI runs on the device. The only thing that leaves is the request to fetch the page you shared.",
+          a: "Not for classification. The AI runs on the device. What does go over the network is listed in the privacy policy: mainly, the request to fetch the page you shared.",
         },
         {
           q: "What do I need for AI classification?",
-          a: "iOS 18 or later, an iPhone that supports Apple Intelligence, and it turned on in Settings. Without that, ThreadVault still saves and searches, just without a summary or category.",
+          a: "An iPhone that supports Apple Intelligence, iOS 26, and it turned on in Settings. Without that, ThreadVault still saves, shows previews and searches by text, just without a summary, category or tags.",
         },
         {
-          q: "What is the difference between Free and Pro?",
-          a: "Free saves without limit and classifies on device. Pro adds semantic search, iCloud sync, Markdown export and a reading view.",
+          q: "What can I save?",
+          a: "Links and images from the iOS share sheet, and notes typed in the app or dictated to Siri.",
         },
         {
           q: "Will there be an Android version?",
           a: "It is in development, with hybrid on-device AI, Gemini Nano and Gemma 4. Leave your email below and we will let you know.",
-        },
-        {
-          q: "How do I cancel Pro?",
-          a: "From your Apple Account settings, like any App Store subscription. ThreadVault does not handle payments and cannot charge you outside of that.",
         },
       ],
     },
