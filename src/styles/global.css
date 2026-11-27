@@ -3,10 +3,7 @@
 /* Only scan the site's own source. Tailwind otherwise reads the planning docs and
    emits utilities for class names that appear in their code samples. */
 @source not "../../docs";
-@source not "../../landing-plan.md";
 @source not "../../README.md";
-@source not "../../AGENTS.md";
-@source not "../../CLAUDE.md";
 
 @theme {
   --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
