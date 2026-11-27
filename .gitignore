@@ -28,3 +28,14 @@ pnpm-debug.log*
 
 # Lighthouse reports (Task 14)
 .superpowers/sdd/2026-09-15-landing-redesign/lighthouse/
+
+# Local working files (not part of the project)
+CLAUDE.md
+AGENTS.md
+WARP.md
+REVIEW_FINDINGS.md
+landing-plan.md
+.claude/
+.claude-flow/
+.codegraph/
+.audit/
